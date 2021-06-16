@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bucket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<th:block th:include="header"></th:block>
+<body>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Genre</th>
+        <th>Image</th>
+        <th></th>
+    </tr>
+    <th:block th:each="book: ${bucket.books}">
+        <tr>
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.genre}"></td>
+            <td><a th:href="@{'/books/' + ${book.id}}">
+                <img th:src="@{'/images/' + ${book.image}}" alt="book" width="50" height="50"/>
+            </a></td>
+            <td>
+                <form th:action="@{/buckets/delete-from-bucket(bookId=${book.id})}" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </th:block>
+</table>
+
+<a th:href="@{/orders/new}">Place order</a>
+</body>
+</html>

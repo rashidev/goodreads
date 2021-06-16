@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" th:href="@{/books}">Good reads</a>
+
+    </div>
+    <ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-left">
+        <li>
+            <a th:href="@{/buckets/my-bucket}">My Bucket</a>
+        </li>
+    </ul>
+    <ul sec:authorize="isAnonymous()" class="nav navbar-nav navbar-right">
+        <li>
+            <a th:href="@{/users/login}">Log in</a>
+        </li>
+        <li>
+            <a th:href="@{/users/registration}">Sign up</a>
+        </li>
+    </ul>
+    <ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
+        <li>
+            <a th:href="@{/users/logout}">Log out</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

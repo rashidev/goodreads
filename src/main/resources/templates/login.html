@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<th:block th:include="header"></th:block>
+
+<div class="container">
+    <a type="button" th:href="@{/books}" class="btn btn-warning">Home</a>
+    <a type="button" th:href="@{/users/registration}" class="btn btn-info">Register</a>
+    <form th:action="@{/users/login}" method="POST" class="form-signin">
+        <input type="text" id="login" name="username" placeholder="User name" class="form-control"/><br/>
+        <input type="password" id="password" name="password" placeholder="Password" class="form-control"/><br/>
+        <button class="btn btn-primary btn-block" name="Log in" value="Log in" type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>

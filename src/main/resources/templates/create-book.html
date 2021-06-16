@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new book</title>
+</head>
+<body>
+<th:block th:include="header"></th:block>
+
+<h1>Create book</h1>
+
+<form th:action="@{/admin/books/create}" th:object="${book}" method="post">
+    <label>
+        Name
+        <input type="text" th:field="${book.name}"/>
+    </label>
+    <label>
+        Author
+        <input type="text" th:field="${book.author}"/>
+    </label>
+    <label>
+        Price
+        <input type="number" th:field="${book.price}"/>
+    </label>
+    <br/>
+    <label>
+        Left in stock
+        <input type="text" th:field="${book.leftInStock}"/>
+    </label>
+    <label>
+        Publisher
+        <input type="text" th:field="${book.publisher}"/>
+    </label>
+    <label>
+        Page count
+        <input type="number" th:field="${book.pageCount}"/>
+    </label>
+    <label>
+        Language
+        <input type="text" th:field="${book.language}"/>
+    </label>
+    <br/>
+    <label>
+        Image
+        <input type="text" th:field="${book.image}"/>
+    </label>
+
+    <label>
+        Genre
+        <select id="genre" th:field="${book.genre}">
+            <option value="CLASSICS">Classics</option>
+            <option value="DETECTIVE">Detective</option>
+            <option value="FANTASY">Fantasy</option>
+            <option value="SCIENCE">Science</option>
+            <option value="DRAMA">Drama</option>
+        </select>
+    </label>
+    <br/>
+    <label>
+        Description
+        <textarea th:field="${book.description}"/>
+    </label>
+
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

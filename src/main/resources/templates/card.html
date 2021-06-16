@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:include="header"></th:block>
+
+<form th:action="@{/cards}" method="post" th:object="${card}">
+    <label>
+        Card number
+        <input th:field="${card.number}"/>
+    </label>
+    <br/>
+    <label>
+        Cvv
+        <input th:field="${card.cvv}"/>
+    </label>
+    <br/>
+    <button type="submit">Add new card</button>
+</form>
+</body>
+</html>
