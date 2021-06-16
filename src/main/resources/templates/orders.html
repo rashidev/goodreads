@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<th:block th:include="header"></th:block>
+
+<table>
+
+    <tr>
+        <th>Order number</th>
+        <th>Description</th>
+        <th>Total amount</th>
+        <th>Card Number</th>
+    </tr>
+
+    <th:block th:each="order: ${orders}">
+        <tr>
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.description}"></td>
+            <td th:text="${order.totalAmount}"></td>
+            <td th:text="${order.card.number}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

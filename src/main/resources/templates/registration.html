@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+
+<th:block th:include="header"></th:block>
+
+<form th:action="@{/users/registration}" method="POST" th:object="${user}">
+    <h2>Registration Form</h2>
+    <label>
+        Login: <input type="text" th:field="${user.login}" class="form-control"/>
+    </label>
+    <label th:if="${#fields.hasErrors('login')}" th:errors="${user.login}" class="validation-message"></label>
+
+    <br/>
+    <label>
+        Email: <input type="text" th:field="${user.email}" class="form-control"/>
+    </label>
+    <label th:if="${#fields.hasErrors('email')}" th:errors="${user.email}" class="validation-message"></label>
+
+    <br/>
+    <label>
+        Password: <input type="password" th:field="${user.password}" class="form-control"/>
+    </label>
+    <label th:if="${#fields.hasErrors('password')}" th:errors="${user.password}" class="validation-message"></label>
+
+    <br/>
+    <label>
+        First name: <input type="text" th:field="${user.firstName}" class="form-control"/>
+    </label>
+    <label th:if="${#fields.hasErrors('firstName')}" th:errors="${user.firstName}" class="validation-message"></label>
+
+    <br/>
+    <label>
+        Last name: <input type="text" th:field="${user.lastName}" class="form-control"/>
+    </label>
+    <label th:if="${#fields.hasErrors('lastName')}" th:errors="${user.lastName}" class="validation-message"></label>
+
+    <br/>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+</body>
+</html>

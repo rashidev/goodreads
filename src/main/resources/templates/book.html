@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<th:block th:include="header"></th:block>
+
+<img th:src="@{'/images/' + ${book.image}}" alt="book" width="500" height="500"/>
+<br/>
+<label> Book name:
+    <p th:text="${book.name}"></p>
+</label>
+<br/>
+<label> Book genre:
+    <p th:text="${book.genre}"></p>
+</label>
+<br/>
+<label> Description:
+    <p th:text="${book.description}"></p>
+</label>
+<br/>
+<label> Book price:
+    <p th:text="${book.price}"></p>
+</label>
+<br/>
+<label> Left in stock:
+    <p th:text="${book.leftInStock}"></p>
+</label>
+<br/>
+<label> Author:
+    <p th:text="${book.author}"></p>
+</label>
+<br/>
+<label> Publisher:
+    <p th:text="${book.publisher}"></p>
+</label>
+<br/>
+<label> Language:
+    <p th:text="${book.language}"></p>
+</label>
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a th:href="@{'/admin/books/' + ${book.id} +'/update'}">
+        Update book
+    </a>
+    <form th:action="@{'/admin/books/' + ${book.id} + '/delete'}" method="post">
+        <button type="submit">Delete</button>
+    </form>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>User name</th>
+        <th>Comment</th>
+        <th>Rating</th>
+    </tr>
+
+    <th:block th:each="review: ${book.reviews}">
+        <tr>
+            <td th:text="${review.user.getFirstName()} + ' ' + ${review.user.lastName}"></td>
+            <td th:text="${review.comment}"></td>
+            <td th:text="${review.rating}"></td>
+        </tr>
+    </th:block>
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/buckets/add-to-bucket(bookId=${book.id})}" method="POST">
+            <button type="submit" class="btn btn-success">Add to bucket</button>
+        </form>
+        <br/>
+        <form th:action="@{'/books/' + ${book.id} + '/review'}" method="post" th:object="${review}">
+            <input type="number" th:field="${review.id}" style="display: none"/>
+            <label>
+                Rating:
+                <input type="number" th:field="${review.rating}"/>
+            </label>
+            <br/>
+            <label>
+                Comment:
+                <textarea th:field="${review.comment}">
+                </textarea>
+            </label>
+            <br/>
+            <button type="submit">Add review</button>
+        </form>
+    </div>
+</table>
+</body>
+</html>
